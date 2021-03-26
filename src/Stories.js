@@ -4,7 +4,7 @@ import { useGlobalContext } from './context'
 
 
 const Stories = () => {
-  const {isLoading, hits} = useGlobalContext()
+  const {isLoading, hits, removeStory} = useGlobalContext()
 
   if (isLoading) {
     return <div className='loading'></div>
@@ -12,9 +12,9 @@ const Stories = () => {
   return (
   <section className='stories'>
     {hits.map((story) => {
-      const {objectId, title, num_comments, url, points, author} = story
+      const {objectID, title, num_comments, url, points, author} = story
       return (
-        <article className='story' key={objectId}>
+        <article className='story' key={objectID}>
           <h4 className='title'>{title}</h4>
           <p className='info'>
             {points} points by <span>{author} | </span>
@@ -22,7 +22,7 @@ const Stories = () => {
           </p>
           <div>
             <a href={url} className='read-link'>read more</a>
-            <button className='remove-btn'>remove</button>
+            <button className='remove-btn' onClick={() => removeStory(objectID)}>remove</button>
           </div>
         </article>
       )
